@@ -2,6 +2,9 @@
 # XML
 *.xml
 
+# 
+*.txt
+
 # mf files
 *.mf
 
