@@ -9,7 +9,7 @@
 *.properties
 
 # Classes files
-*.classes
+*.class
 
 #
 *.netbeans_update_resources
