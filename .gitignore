@@ -1,0 +1,16 @@
+# NetBeans Project .gitignore
+# XML
+*.xml
+
+# mf files
+*.mf
+
+# Properties files
+*.properties
+
+# Classes files
+*.classes
+
+#
+*.netbeans_update_resources
+*.netbeans_automatic_build
