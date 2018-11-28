@@ -17,3 +17,5 @@
 #
 *.netbeans_update_resources
 *.netbeans_automatic_build
+/Figures/nbproject/private/
+/Figures/build/
