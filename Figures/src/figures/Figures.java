@@ -18,7 +18,7 @@ public class Figures {
         String source = "D:\\polygons.txt";
         String bufferedStr;
         
-        try (BufferedReader reader = new BufferedReader(new FileReader(source));) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(source))) {
             String str;
             String points[];
             String coord[] = new String[2];
@@ -40,9 +40,9 @@ public class Figures {
             }
             
             // Tasks
-            System.out.println(Tasks.minPerimeter(polygons));
-            System.out.println(Tasks.sortSq(polygons));
-            System.out.println(Tasks.certainFigures(polygons));
+            System.out.println("Min perimeter:\n" + Tasks.minPerimeter(polygons));
+            System.out.println("Sorted by squares:\n" + Tasks.sortSq(polygons));
+            System.out.println("Certain figures:\n" + Tasks.certainFigures(polygons));
         } catch (IOException e) {
             System.out.println(e);
         }

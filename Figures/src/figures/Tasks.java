@@ -46,11 +46,16 @@ public class Tasks {
         if (pol.getVertices().size() != 4)
             return false;
         
+        ArrayList<Point> points = pol.getVertices();
+        
         for (int i = 1; i < pol.getVertices().size() - 1; i++){
-            ArrayList<Point> points = pol.getVertices();
             if (scalarProduct(points.get(i), points.get(i - 1), points.get(i + 1)) != 0)
                 return false;
         }
+        
+        if (scalarProduct(points.get(points.size() - 1), points.get(0), points.get(points.size() - 2)) != 0)
+            return false;
+        
         return true;
     }
     
