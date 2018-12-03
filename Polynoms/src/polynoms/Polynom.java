@@ -13,6 +13,15 @@ public class Polynom {
         this.power = power;
     }
     
+    public double valueAtPoint(double point){
+        double value = 0;
+        for (int i = 0; i < power + 1; i++){
+            value += coef[i] * Math.pow(point, i);
+        }
+        
+        return value;
+    }
+    
     public int getPower(){
         return power;
     }

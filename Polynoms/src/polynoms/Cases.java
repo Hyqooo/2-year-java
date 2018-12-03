@@ -87,4 +87,11 @@ public class Cases {
         
         return new Polynom(newPower, productPolynom);
     }
+    
+    public static void ValuesBeetwenAB(Polynom polynom, double a, double b, double step){
+        System.out.println("Table from " + a + " to " + b);
+        for (double i = a; i < b; i += step){
+            System.out.println("At value " + i + ": " + polynom.valueAtPoint(i));
+        }
+    }
 }
