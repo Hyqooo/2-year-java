@@ -49,8 +49,20 @@ public class Dates {
                     dates.add(newDate);
                 }
             }
-            System.out.println("Dates before original date: " + originalDate.datesBefore(dates));
-            System.out.println("Dates after original date: " + originalDate.datesAfter(dates));    
+            
+            ArrayList<Date> datesBefore = new ArrayList<>();
+            ArrayList<Date> datesAfter = new ArrayList<>();
+            // Walk through list
+            for (Date dt : dates) {
+                if (dt.isDateBefore(originalDate))
+                    datesBefore.add(dt);
+                else
+                    datesAfter.add(dt);
+            }
+            
+            System.out.println("Dates before: " + datesBefore);
+            System.out.println("Dates after: " + datesAfter);
+            
         } catch(InvalidDateException | ArrayIndexOutOfBoundsException e){
             System.out.println(e);
         } catch (IOException ex) {

@@ -61,29 +61,12 @@ public class Date {
         return days[(day + y + y / 4 - y / 100 + y / 400 + (31 * m) / 12) % 7];
     }
     
-    public List<Date> datesBefore(ArrayList<Date> dates){
-        int index = 0;
-        dates.add(this);
-        Collections.sort(dates, new DateComparator());
-        for (Date dt : dates){
-            if (dt.equals(this)){
-                index = dates.indexOf(dt);
-                break;
-            }
-        }
+    public boolean isDateBefore(Date date){
+        DateComparator c = new DateComparator(); 
+        if (c.compare(date, this) > 0)
+            return true;
         
-        return dates.subList(0, index);
-    }
-    
-    public List<Date> datesAfter(ArrayList<Date> dates){
-        int index = 0;
-        Collections.sort(dates, new DateComparator());
-        for (Date dt : dates){
-            if (dt.equals(this))
-                index = dates.indexOf(dt);
-        }
-        
-        return dates.subList(index + 1, dates.size());
+        return false;
     }
     
     public Date offsetDate(int offset) throws InvalidDateException{

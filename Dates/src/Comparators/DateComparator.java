@@ -9,10 +9,10 @@ public class DateComparator implements Comparator<Date> {
     public int compare(Date dt_1, Date dt_2){
         if (dt_1.getYear() == dt_2.getYear()){
             if (dt_1.getMonth() == dt_2.getMonth()){
-                if (dt_1.getYear() == dt_2.getYear())
+                if (dt_1.getDay() == dt_2.getDay())
                     return 0;
                 else 
-                    return dt_1.getMonth() - dt_2.getMonth();
+                    return dt_1.getDay() - dt_2.getDay();
             }else{
                 return dt_1.getMonth() - dt_2.getMonth();
             }   
