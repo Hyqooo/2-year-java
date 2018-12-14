@@ -5,10 +5,9 @@ public class Telegram {
     StringBuilder text;
     int pricePerWord;
     
-    public Telegram(String text){
+    public Telegram(String text) throws MissPeriodException{
         if (text.charAt(text.length() - 1) != '.')
-            // Throws miss '.'
-            System.out.println("Tochka");
+            throw new MissPeriodException();
         
         this.text = new StringBuilder(text);
         parseToTelegram();
