@@ -11,6 +11,7 @@ public class TestWork2Larina {
        
        Telegram tel = new Telegram(text);
        System.out.println(tel);
+       System.out.println("Price of the telegram: " + tel.evaluatePrice());
     }
     
 }
