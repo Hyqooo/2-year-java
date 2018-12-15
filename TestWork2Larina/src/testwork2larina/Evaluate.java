@@ -18,6 +18,6 @@ public abstract class Evaluate<T> {
     
     @Override
     public String toString(){
-        return "Amount of units: " + amountOfUnits() + "\nFull cost: " + evaluatePrice(); 
+        return "\nUnit: " + fullUnit + "\nFull cost: " + evaluatePrice(); 
     }
 }

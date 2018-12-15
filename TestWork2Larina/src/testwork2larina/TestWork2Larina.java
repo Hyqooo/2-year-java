@@ -10,11 +10,8 @@ public class TestWork2Larina {
         String text = sc.nextLine();
        
         try{
-            Telegram tel = new Telegram(text);
-            System.out.println(tel);
-            System.out.println("Price of the telegram: " + tel.evaluatePrice());
-            
-            System.out.println(new Letter(10));
+            System.out.println(new Telegram(text));
+            System.out.println("Letter: " + new Letter(10));
         }catch(MissPeriodException e){
            System.out.println(e);
         }

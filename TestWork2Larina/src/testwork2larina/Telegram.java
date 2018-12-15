@@ -1,66 +1,63 @@
 package testwork2larina;
 
 
-public class Telegram {
-    private StringBuilder text;
-    private int pricePerWord;
-    private final static int BLANKPRICE = 5; 
+public class Telegram extends Evaluate<String> {
+    
+    private StringBuilder textOfTelegram;
+    private final static int BLANK_PRICE = 5;
     
     public Telegram(String text) throws MissPeriodException{
-        if (text.charAt(text.length() - 1) != '.')
+        super(text);
+        if (fullUnit.charAt(fullUnit.length() - 1) != '.')
             throw new MissPeriodException();
-        
-        this.text = new StringBuilder(text);
         parseToTelegram();
     }
     
     private void parseToTelegram(){
-        switch (text.toString().split(" ")[0]){
-            case "Urgent":
-                pricePerWord = 4;
-                break;
-            case "Govermental":
-                pricePerWord = 6;
-                break;
-            case "International":
-                pricePerWord = 8;
-                break;
-            case "Artistic":
-                pricePerWord = 4;
-                break;
-            default:
-                pricePerWord = 2;
-                break;
-        }
+        textOfTelegram = new StringBuilder(fullUnit);
         
-        for (int i = 0; i < text.length(); i++){
-            if (text.charAt(i) == ','){
-                text.setCharAt(i, ' ');
-                text.insert(i + 1, "зпт ");
+        for (int i = 0; i < textOfTelegram.length(); i++){
+            if (textOfTelegram.charAt(i) == ','){
+                textOfTelegram.setCharAt(i, ' ');
+                textOfTelegram.insert(i + 1, "зпт ");
             }
-            if (text.charAt(i) == '.'){
-                text.setCharAt(i, ' ');
-                text.insert(i + 1, "тчк");
+            if (textOfTelegram.charAt(i) == '.'){
+                textOfTelegram.setCharAt(i, ' ');
+                textOfTelegram.insert(i + 1, "тчк");
             }
         }
     }
-    
-    public int evaluatePrice(){
-        return lengthOfTelegram() * pricePerWord + blankPrice();
+
+    @Override
+    public int amountOfUnits() {
+        return textOfTelegram.toString().split(" ").length;
     }
-    
-    public int lengthOfTelegram(){
-        return text.toString().split(" ").length;
-    }
-    
-    private int blankPrice(){
-        if (text.toString().split(" ")[0].equals("Urgent"))
-            return BLANKPRICE;
+
+    @Override
+    public int additionalCosts() {
+        if (fullUnit.split(" ")[0].equals("Artistic")) 
+            return BLANK_PRICE;
         return 0;
+    }
+
+    @Override
+    public int costOfUnit() {
+        switch (fullUnit.toString().split(" ")[0]){
+            case "Urgent":
+                return 4;
+            case "Govermental":
+                return 6;
+            case "International":
+                return 8;
+            case "Artistic":
+                return 4;
+            default:
+                return 2;
+        }
     }
     
     @Override
     public String toString(){
-        return text.toString();
+        return "Telegram\n" + "Text of the telegram: " + textOfTelegram.toString() + "\nFullCost: " + evaluatePrice();
     }
 }
