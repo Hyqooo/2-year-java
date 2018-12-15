@@ -2,8 +2,9 @@ package testwork2larina;
 
 
 public class Telegram {
-    StringBuilder text;
-    int pricePerWord;
+    private StringBuilder text;
+    private int pricePerWord;
+    private final static int BLANKPRICE = 5; 
     
     public Telegram(String text) throws MissPeriodException{
         if (text.charAt(text.length() - 1) != '.')
@@ -14,11 +15,23 @@ public class Telegram {
     }
     
     private void parseToTelegram(){
-        if (text.toString().split(" ")[0].equals("Sroch"))
-            pricePerWord = 4;
-        else
-            pricePerWord = 2;
-        
+        switch (text.toString().split(" ")[0]){
+            case "Urgent":
+                pricePerWord = 4;
+                break;
+            case "Govermental":
+                pricePerWord = 6;
+                break;
+            case "International":
+                pricePerWord = 8;
+                break;
+            case "Artistic":
+                pricePerWord = 4;
+                break;
+            default:
+                pricePerWord = 2;
+                break;
+        }
         
         for (int i = 0; i < text.length(); i++){
             if (text.charAt(i) == ','){
@@ -33,11 +46,17 @@ public class Telegram {
     }
     
     public int evaluatePrice(){
-        return lengthOfTelegram() * pricePerWord;
+        return lengthOfTelegram() * pricePerWord + blankPrice();
     }
     
     public int lengthOfTelegram(){
         return text.toString().split(" ").length;
+    }
+    
+    private int blankPrice(){
+        if (text.toString().split(" ")[0].equals("Urgent"))
+            return BLANKPRICE;
+        return 0;
     }
     
     @Override
