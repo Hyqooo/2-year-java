@@ -1,10 +1,13 @@
 package testwork2larina;
 
+import java.util.ArrayList;
+
 
 public class Telegram extends Evaluate<String> {
     
     private StringBuilder textOfTelegram;
     private final static int BLANK_PRICE = 5;
+    private final static String[] prepositions = {"b", "a"};
     
     public Telegram(String text) throws MissPeriodException{
         super(text);
@@ -26,6 +29,31 @@ public class Telegram extends Evaluate<String> {
                 textOfTelegram.insert(i + 1, "тчк");
             }
         }
+        
+        deletePrepositions();
+    }
+    
+    private void deletePrepositions(){
+        String str[] = textOfTelegram.toString().split(" ");
+        int indexToStart = 0;
+        int indexToEnd = 0;
+        for (int i = 0; i < str.length; i++){
+            if (isPreposition(str[i])){
+                indexToStart = textOfTelegram.indexOf(str[i], indexToEnd);
+                indexToEnd = indexToStart + str[i].length();
+                textOfTelegram.delete(indexToStart, indexToEnd);
+            }
+            indexToEnd += str[i].length();
+        }
+    }
+    
+    private boolean isPreposition(String str){
+        for (int i = 0; i < prepositions.length; i++){
+            if (prepositions[i].equals(str))
+                return true;
+        }
+        
+        return false;
     }
 
     @Override
