@@ -51,23 +51,14 @@ public class Lambda_exlosition {
         System.out.println(div.action(9, 2));
         System.out.println(gcd.action(48, 36));
 
-//        // additional
-//        ArrayList<String> str = new ArrayList<>();
-//        str.add("aas");
-//        str.add("aslfjkasjdfajsf asl djflasjdfl ");
-//        str.add("sadfsdffffff");
-//        Action<Integer, String> length = (str_1, str_2) -> {
-//            return str_1.compareTo(str_2);
-//        };
-
         ArrayList<Integer> list = new ArrayList<>();
         list.add(13);
         list.add(2);
         list.add(39);
         list.add(51);
-        Stream <Integer> streamFromList = list.stream();
+        Stream<Integer> streamFromList = list.stream();
         System.out.println(streamFromList.filter(o -> o / 10 != 0).filter(o -> o % 13 == 0).
-                                                    collect(Collectors.toList()));
+                collect(Collectors.toList()));
 
         ArrayList<String> str = new ArrayList<>();
         str.add("adssadZ");
@@ -76,10 +67,10 @@ public class Lambda_exlosition {
         str.add("adssZZ");
 
         Stream<String> streamFromStr = str.stream();
-        long k = streamFromStr.filter((s) -> {
-            return s.endsWith("Z");
-        }).count();
-        
-        System.out.println(k);
+        System.out.println(
+                streamFromStr.filter((s) -> {
+                    return s.endsWith("Z");
+                }).count()
+        );
     }
 }
