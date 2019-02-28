@@ -3,29 +3,29 @@ package flat.exchanger;
 import java.util.ArrayList;
 
 public class FlatDatabase {
-    ArrayList<Integer> flats;
+    ArrayList<Flat> flats;
     
     public FlatDatabase(){
         flats = new ArrayList<>();
     }
     
-    public void add(Integer flat){
+    public void add(Flat flat){
         
     }
     
-    public void remove(Integer flat){
+    public void remove(Flat flat){
         
     }
     
-    public void search(Integer flat){
+    public void search(Flat flat){
         
     }
     
-    public ArrayList<Integer> displayByAreas(){
+    public ArrayList<Flat> displayByAreas(){
         return null;
     }
     
-    public ArrayList<Integer> displayByRooms(){
+    public ArrayList<Flat> displayByRooms(){
         return null;
     }
     
