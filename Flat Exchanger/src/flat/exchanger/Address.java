@@ -36,8 +36,8 @@ class Address {
     public String toString() {
         return "" 
                 + "Area: " + area 
-                + "Street: " + street
-                + "Number of house: " + numberOfHouse 
-                + "Floor: " + floor;
+                + "\nStreet: " + street
+                + "\nNumber of house: " + numberOfHouse 
+                + "\nFloor: " + floor;
     } 
 }
