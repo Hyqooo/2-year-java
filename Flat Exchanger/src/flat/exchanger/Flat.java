@@ -23,6 +23,10 @@ public class Flat {
         this.paramOfExchange = paramOfExchange;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
@@ -45,5 +49,10 @@ public class Flat {
                 + "\nType of house: " + typeOfHouse.toString()
                 + "\nPrice: " + price
                 + "\nParameters of exchange\n" + paramOfExchange.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return address.hashCode();
     }
 }

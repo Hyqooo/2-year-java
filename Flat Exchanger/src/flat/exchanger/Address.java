@@ -18,14 +18,13 @@ class Address {
     public boolean equals(Object obj) {
         if (obj == null) return false;
         
-        if (!(obj instanceof Flat)) return false;
+        if (!(obj instanceof Address)) return false;
         
         Address addr = (Address)obj;
         if (
                    addr.area.equals(area)
                 && addr.street.equals(street)
                 && addr.numberOfHouse == numberOfHouse
-                && addr.floor == floor
             )
             return true;
         
@@ -39,5 +38,15 @@ class Address {
                 + "\nStreet: " + street
                 + "\nNumber of house: " + numberOfHouse 
                 + "\nFloor: " + floor;
-    } 
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        for (int i = 0; i < toString().length(); i++){
+            hash = hash * 31 + toString().charAt(i);
+        }
+        
+        return hash;
+    }
 }

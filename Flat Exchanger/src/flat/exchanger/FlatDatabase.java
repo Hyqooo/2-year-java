@@ -1,9 +1,10 @@
 package flat.exchanger;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class FlatDatabase {
-    ArrayList<Flat> flats;
+    private ArrayList<Flat> flats;
     
     public FlatDatabase(){
         flats = new ArrayList<>();
@@ -13,12 +14,16 @@ public class FlatDatabase {
         flats.add(flat);
     }
     
-    public void remove(Flat flat){
-        flats.remove(flat);
+    public void remove(int index){
+        flats.remove(index);
     }
-    
+
     public void search(Flat flat){
         
+    }
+    
+    public Stream toStream(){
+        return flats.stream();
     }
     
     public ArrayList<Flat> displayByAreas(){

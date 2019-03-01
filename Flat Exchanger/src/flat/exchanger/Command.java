@@ -5,7 +5,7 @@ import FlatExceptioins.EmptyStringException;
 import java.util.Scanner;
 
 public class Command {
-    
+
     private static Scanner sc = new Scanner(System.in);
     
     // Input is interface because we can return any type we want to
@@ -109,7 +109,12 @@ public class Command {
     }
     
     public static void remove(FlatDatabase flatDB){
+        int indexOfFlat = 0;
         
+        // Show short list of addresses of flats
+        
+        
+        indexOfFlat = numberInput.input("index of the flat to delete").intValue();
     }
     
     public static void search(FlatDatabase flatDB){
