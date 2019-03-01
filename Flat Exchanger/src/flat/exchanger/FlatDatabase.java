@@ -10,11 +10,11 @@ public class FlatDatabase {
     }
     
     public void add(Flat flat){
-        
+        flats.add(flat);
     }
     
     public void remove(Flat flat){
-        
+        flats.remove(flat);
     }
     
     public void search(Flat flat){
@@ -31,5 +31,10 @@ public class FlatDatabase {
     
     public ArrayList<Integer> displayWithinRange(int minimun, int maximum){
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "" + flats.toString();
     }
 }
