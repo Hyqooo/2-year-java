@@ -7,20 +7,18 @@ public class Flat {
         BRICKS
         };
     
-    private int footage;
+    private double footage;
     private int numberOfRooms;
     private Address address;
     private typeOfH typeOfHouse;
-    private int floorNumber;
-    private int price;
+    private double price;
     private Address paramOfExchange;
 
-    public Flat(int footage, int numberOfRooms, Address address, typeOfH typeOfHouse, int floorNumber, int price, Address paramOfExchange) {
+    public Flat(double footage, int numberOfRooms, Address address, typeOfH typeOfHouse, double price, Address paramOfExchange) {
         this.footage = footage;
         this.numberOfRooms = numberOfRooms;
         this.address = address;
         this.typeOfHouse = typeOfHouse;
-        this.floorNumber = floorNumber;
         this.price = price;
         this.paramOfExchange = paramOfExchange;
     }
@@ -43,10 +41,9 @@ public class Flat {
         return ""
                 + "Footage: " + footage 
                 + "\nNumberOfRooms: " + numberOfRooms
-                + "\nAddress:" + address.toString()
+                + "\nAddress\n" + address.toString()
                 + "\nType of house: " + typeOfHouse.toString()
-                + "\nNumber of floors: " + floorNumber
                 + "\nPrice: " + price
-                + "\nParameters of exchange: " + paramOfExchange.toString();
+                + "\nParameters of exchange\n" + paramOfExchange.toString();
     }
 }
