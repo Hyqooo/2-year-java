@@ -5,46 +5,47 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FlatDatabase {
+
     private ArrayList<Flat> flats;
-    
-    public FlatDatabase(){
+
+    public FlatDatabase() {
         flats = new ArrayList<>();
     }
-    
-    public void add(Flat flat){
+
+    public void add(Flat flat) {
         flats.add(flat);
     }
-    
-    public void remove(int index) throws IndexOutOfBoundsException{
+
+    public void remove(int index) throws IndexOutOfBoundsException {
         flats.remove(index);
     }
 
-    public void search(Flat flat){
-        
+    public void search(Flat flat) {
+
     }
-    
-    public String show(){
+
+    public String show() {
         String result = "";
-        
-        for (int i = 0; i < flats.size();i++){
+
+        for (int i = 0; i < flats.size(); i++) {
             result += (i + 1) + ") " + flats.get(i).getAddress().toString() + "\n";
         }
-        
+
         return result;
     }
-    
-    public ArrayList<Flat> displayByAreas(){
+
+    public ArrayList<Flat> displayByAreas() {
         flats.sort((a, b) -> a.getAddress().getArea().compareTo(b.getAddress().getArea()));
         return flats;
     }
-    
-    public ArrayList<Flat> displayByRooms(){
+
+    public ArrayList<Flat> displayByRooms() {
         flats.sort((a, b) -> a.getNumberOfRooms() - b.getNumberOfRooms());
         return flats;
     }
-    
-    public ArrayList<Flat> displayWithinRange(double minimum, double maximum){
-        return (ArrayList<Flat>)flats.stream()
+
+    public ArrayList<Flat> displayWithinRange(double minimum, double maximum) {
+        return (ArrayList<Flat>) flats.stream()
                 .filter(each -> each.getPrice() > minimum && each.getPrice() < maximum)
                 .collect(Collectors.toList());
     }

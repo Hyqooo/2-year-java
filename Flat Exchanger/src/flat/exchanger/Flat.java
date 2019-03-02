@@ -1,12 +1,12 @@
 package flat.exchanger;
 
-
 public class Flat {
+
     enum typeOfH {
         PANEL,
         BRICKS
-        };
-    
+    };
+
     private double footage;
     private int numberOfRooms;
     private Address address;
@@ -26,7 +26,7 @@ public class Flat {
     public Address getAddress() {
         return address;
     }
-    
+
     public double getPrice() {
         return price;
     }
@@ -37,21 +37,26 @@ public class Flat {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) return false;
-        
-        if (!(obj instanceof Flat)) return false;
-        
-        Flat fl = (Flat)obj;
-        if (fl.address.equals(address))
+        if (obj == null) {
+            return false;
+        }
+
+        if (!(obj instanceof Flat)) {
+            return false;
+        }
+
+        Flat fl = (Flat) obj;
+        if (fl.address.equals(address)) {
             return true;
-        
+        }
+
         return false;
     }
 
     @Override
     public String toString() {
         return ""
-                + "Footage: " + footage 
+                + "Footage: " + footage
                 + "\nNumberOfRooms: " + numberOfRooms
                 + "\nAddress\n" + address.toString()
                 + "\nType of house: " + typeOfHouse.toString()

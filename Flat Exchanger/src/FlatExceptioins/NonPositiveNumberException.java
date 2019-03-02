@@ -7,9 +7,9 @@ public class NonPositiveNumberException extends Exception {
     public NonPositiveNumberException(String parameter) {
         this.parameter = parameter;
     }
-    
+
     @Override
     public String toString() {
-        return  parameter + " cannot be non-positive!";
+        return parameter + " cannot be non-positive!";
     }
 }

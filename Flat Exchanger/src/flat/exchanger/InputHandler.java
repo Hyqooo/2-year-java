@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class InputHandler {
-    
+
     // Original database
     static FlatDatabase DB = new FlatDatabase();
 
     // Help
     static HashMap<String, String> help = new HashMap<>();
-    
+
     public static void commandHandler() {
         String command;
 
@@ -52,15 +52,15 @@ public class InputHandler {
                     System.out.format("Command %s is unknown,try again\n", command);
                     break;
             }
-            
+
         }
     }
 
+    // Reads data from file and adds them to collection
     public static void readFile() {
-        // Reads data from file and adds them to collection
     }
-    
-    public static void initHelp(){
+
+    public static void initHelp() {
         help.put("add", "Adds a new flat to database");
         help.put("remove", "Removes specified flat from database");
         help.put("search", "Searches specified flat to exchange");

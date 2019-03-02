@@ -1,7 +1,7 @@
 package flat.exchanger;
 
-
 class Address {
+
     private String area;
     private String street;
     private int numberOfHouse;
@@ -20,37 +20,40 @@ class Address {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) return false;
-        
-        if (!(obj instanceof Address)) return false;
-        
-        Address addr = (Address)obj;
-        if (
-                   addr.area.equals(area)
+        if (obj == null) {
+            return false;
+        }
+
+        if (!(obj instanceof Address)) {
+            return false;
+        }
+
+        Address addr = (Address) obj;
+        if (addr.area.equals(area)
                 && addr.street.equals(street)
-                && addr.numberOfHouse == numberOfHouse
-            )
+                && addr.numberOfHouse == numberOfHouse) {
             return true;
-        
+        }
+
         return false;
     }
 
     @Override
     public String toString() {
-        return "" 
-                + "Area: " + area 
+        return ""
+                + "Area: " + area
                 + "\nStreet: " + street
-                + "\nNumber of house: " + numberOfHouse 
+                + "\nNumber of house: " + numberOfHouse
                 + "\nFloor: " + floor;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        for (int i = 0; i < toString().length(); i++){
+        for (int i = 0; i < toString().length(); i++) {
             hash = hash * 31 + toString().charAt(i);
         }
-        
+
         return hash;
     }
 }

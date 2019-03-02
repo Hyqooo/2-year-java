@@ -7,5 +7,5 @@ public class FlatExchanger {
         InputHandler.readFile();
         InputHandler.commandHandler();
     }
-    
+
 }
