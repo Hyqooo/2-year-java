@@ -18,13 +18,13 @@ public class Command {
         double input;
         
         while (true){
-            System.out.print("Input " + parameter + ": ");
+            System.out.print(parameter);
             try {
                 // We need to use wrapper because method nextDouble() doesn't cosume '\n' symbol, contrast to method nextLine().
                 // So to avoid any misses of '\n' we use the wrapper.
                 input = Double.valueOf(sc.nextLine());
                 if (input <= 0)
-                    throw new NonPositiveNumberException(parameter);
+                    throw new NonPositiveNumberException("Your input");
                 
                 break;
             } catch (NonPositiveNumberException | NumberFormatException ex) {
@@ -39,7 +39,7 @@ public class Command {
         String input = "";
         
         while (true){
-            System.out.print("Input " + parameter + ": ");
+            System.out.print(parameter);
             try{
                 input = sc.nextLine();
                 if (input.isEmpty())
@@ -60,12 +60,12 @@ public class Command {
         int numberOfHouse;
         int floor;
         
-        System.out.println("Input " + parameter + ": ");
+        System.out.println(parameter);
         
-        area = stringInput.input("area");
-        street = stringInput.input("street");
-        numberOfHouse = numberInput.input("number of the house").intValue();
-        floor = numberInput.input("floor").intValue();
+        area = stringInput.input("Input area: ");
+        street = stringInput.input("Input street: ");
+        numberOfHouse = numberInput.input("Input number of the house: ").intValue();
+        floor = numberInput.input("Input floor: ").intValue();
         
         return new Address(area, street, numberOfHouse, floor);
     };
@@ -74,7 +74,7 @@ public class Command {
         String input;
         
         while (true){
-            input = stringInput.input("type of house<panel/bricks>");
+            input = stringInput.input("Input type of house<panel/bricks>: ");
             
             if (input.equals(Flat.typeOfH.BRICKS.toString().toLowerCase())){
                 return Flat.typeOfH.BRICKS;
@@ -95,12 +95,12 @@ public class Command {
         Address paramToExch;
         
         System.out.println("Adding of flat, input all info");
-        footage = numberInput.input("footage of the flat");
-        numberOfRooms = numberInput.input("number of rooms").intValue();
-        address = addressInput.input("address of the flat");
+        footage = numberInput.input("Input footage of the flat: ");
+        numberOfRooms = numberInput.input("Input number of rooms: ").intValue();
+        address = addressInput.input("Input address of the flat");
         typeOfHouse = typeInput.input("");
-        price = numberInput.input("price of the flat");
-        paramToExch = addressInput.input("address parameters to exchange");
+        price = numberInput.input("Input price of the flat: ");
+        paramToExch = addressInput.input("Input address parameters to exchange");
         
         Flat flat = new Flat(footage, numberOfRooms, address, typeOfHouse, price, paramToExch);
         
@@ -112,10 +112,15 @@ public class Command {
     public static void remove(FlatDatabase flatDB){
         int indexOfFlat = 0;
         
-        // Show short list of addresses of flats
+        // Show all address what database has got
         String show = flatDB.show();
-        System.out.println(show);
-        indexOfFlat = numberInput.input("index of the flat to delete").intValue();
+        if (!show.isEmpty()){
+            System.out.println(show);
+            indexOfFlat = numberInput.input("Input index of the flat to delete: ").intValue();
+        }else{
+            System.out.println("There're no flats in the database");
+            return;
+        }
         
         try{
             flatDB.remove(indexOfFlat - 1);

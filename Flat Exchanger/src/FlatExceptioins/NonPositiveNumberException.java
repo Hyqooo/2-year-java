@@ -10,6 +10,6 @@ public class NonPositiveNumberException extends Exception {
     
     @Override
     public String toString() {
-        return  parameter + " cannot be non-positive!\n";
+        return  parameter + " cannot be non-positive!";
     }
 }
