@@ -14,12 +14,22 @@ public class FlatDatabase {
         flats.add(flat);
     }
     
-    public void remove(int index){
+    public void remove(int index) throws IndexOutOfBoundsException{
         flats.remove(index);
     }
 
     public void search(Flat flat){
         
+    }
+    
+    public String show(){
+        String result = "";
+        
+        for (int i = 0; i < flats.size();i++){
+            result += (i + 1) + ") " + flats.get(i).getAddress().toString() + "\n";
+        }
+        
+        return result;
     }
     
     public Stream toStream(){

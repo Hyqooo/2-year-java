@@ -27,7 +27,7 @@ public class Command {
                 
                 break;
             } catch (NonPositiveNumberException | NumberFormatException ex) {
-                System.out.println(ex + "\ntry again!");
+                System.out.println(ex + "try again!");
             }
         }
         
@@ -112,9 +112,15 @@ public class Command {
         int indexOfFlat = 0;
         
         // Show short list of addresses of flats
-        
-        
+        String show = flatDB.show();
+        System.out.println(show);
         indexOfFlat = numberInput.input("index of the flat to delete").intValue();
+        
+        try{
+            flatDB.remove(indexOfFlat - 1);
+        } catch (IndexOutOfBoundsException ex){
+            System.out.println("There's no flat with specified index");
+        }
     }
     
     public static void search(FlatDatabase flatDB){
