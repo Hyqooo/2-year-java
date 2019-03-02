@@ -1,6 +1,6 @@
 package flat.exchanger;
 
-class Address {
+public class Address {
 
     private String area;
     private String street;

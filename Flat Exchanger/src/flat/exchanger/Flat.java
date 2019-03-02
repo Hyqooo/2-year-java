@@ -35,6 +35,10 @@ public class Flat {
         return numberOfRooms;
     }
 
+    public Address getParamOfExchange() {
+        return paramOfExchange;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -46,11 +50,7 @@ public class Flat {
         }
 
         Flat fl = (Flat) obj;
-        if (fl.address.equals(address)) {
-            return true;
-        }
-
-        return false;
+        return fl.address.equals(address);
     }
 
     @Override

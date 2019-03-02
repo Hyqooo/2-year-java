@@ -2,7 +2,6 @@ package flat.exchanger;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class FlatDatabase {
 
@@ -20,8 +19,10 @@ public class FlatDatabase {
         flats.remove(index);
     }
 
-    public void search(Flat flat) {
-
+    public ArrayList<Flat> search(Flat flat) {
+        return (ArrayList<Flat>) flats.stream()
+                .filter((each) -> each.getAddress().equals(flat.getParamOfExchange()))
+                .collect(Collectors.toList());
     }
 
     public String show() {

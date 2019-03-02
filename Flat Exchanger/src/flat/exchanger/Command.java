@@ -2,7 +2,6 @@ package flat.exchanger;
 
 import FlatExceptioins.NonPositiveNumberException;
 import FlatExceptioins.EmptyStringException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Command {
@@ -138,8 +137,8 @@ public class Command {
         }
     }
 
-    public static void search(FlatDatabase flatDB) {
-
+    public static void search(FlatDatabase flatDB, Scanner toFile) {
+        
     }
 
     public static void sortByRooms(FlatDatabase flatDB) {
