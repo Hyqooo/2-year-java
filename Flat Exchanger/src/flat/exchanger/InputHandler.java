@@ -1,5 +1,7 @@
 package flat.exchanger;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -58,6 +60,19 @@ public class InputHandler {
 
     // Reads data from file and adds them to collection
     public static void readFile() {
+        File path = new File("source.txt");
+        Scanner readFile = null;
+
+        try {
+            readFile = new Scanner(path);
+            while (readFile.hasNextLine()){
+                
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not found");
+        } finally {
+            readFile.close();
+        }
     }
 
     public static void initHelp() {
