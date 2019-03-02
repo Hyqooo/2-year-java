@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class InputHandler {
-
+    
+    private static Scanner stdinput = new Scanner(System.in);
+    
     // Original database
     static FlatDatabase DB = new FlatDatabase();
 
@@ -28,10 +30,10 @@ public class InputHandler {
 
             switch (command) {
                 case "add":
-                    Command.add(DB);
+                    Command.add(DB, stdinput,false);
                     break;
                 case "remove":
-                    Command.remove(DB);
+                    Command.remove(DB, stdinput,false);
                     break;
                 case "search":
                     Command.search(DB);
@@ -43,7 +45,7 @@ public class InputHandler {
                     Command.sortByRooms(DB);
                     break;
                 case "range":
-                    Command.withinRange(DB);
+                    Command.withinRange(DB, stdinput,false);
                     break;
                 case "help":
                     help.forEach((k, v) -> System.out.println(k + " - " + v));
@@ -65,13 +67,15 @@ public class InputHandler {
 
         try {
             readFile = new Scanner(path);
-            while (readFile.hasNextLine()){
-                
+            while (readFile.hasNextLine()) {
+                Command.add(DB, readFile, true);
             }
         } catch (FileNotFoundException ex) {
             System.out.println("File not found");
         } finally {
-            readFile.close();
+            if (readFile != null) {
+                readFile.close();
+            }
         }
     }
 

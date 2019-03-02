@@ -7,19 +7,19 @@ import java.util.Scanner;
 
 public class Command {
 
-    private static Scanner stdinput = new Scanner(System.in);
-
     // Input is interface because we can return any type we want to
     private interface input<R> {
 
-        R input(String parameter, Scanner sc);
+        R input(String parameter, Scanner sc, boolean suppress);
     }
 
-    private static input<Double> numberInput = (parameter, sc) -> {
+    private static input<Double> numberInput = (parameter, sc, suppress) -> {
         double input;
 
         while (true) {
-            System.out.print(parameter);
+            if (suppress == false) {
+                System.out.print(parameter);
+            }
             try {
                 // We need to use wrapper because method nextDouble() doesn't cosume '\n' symbol, contrast to method nextLine().
                 // So to avoid any misses of '\n' we use the wrapper.
@@ -37,11 +37,13 @@ public class Command {
         return input;
     };
 
-    private static input<String> stringInput = (parameter, sc) -> {
+    private static input<String> stringInput = (parameter, sc, suppress) -> {
         String input = "";
 
         while (true) {
-            System.out.print(parameter);
+            if (suppress == false) {
+                System.out.print(parameter);
+            }
             try {
                 input = sc.nextLine();
                 if (input.isEmpty()) {
@@ -57,27 +59,28 @@ public class Command {
         return input;
     };
 
-    private static input<Address> addressInput = (parameter, sc) -> {
+    private static input<Address> addressInput = (parameter, sc, suppress) -> {
         String area;
         String street;
         int numberOfHouse;
         int floor;
+        if (suppress == false) {
+            System.out.println(parameter);
+        }
 
-        System.out.println(parameter);
-
-        area = stringInput.input("Input area: ", sc);
-        street = stringInput.input("Input street: ", sc);
-        numberOfHouse = numberInput.input("Input number of the house: ", sc).intValue();
-        floor = numberInput.input("Input floor: ", sc).intValue();
+        area = stringInput.input("Input area: ", sc, suppress);
+        street = stringInput.input("Input street: ", sc, suppress);
+        numberOfHouse = numberInput.input("Input number of the house: ", sc, suppress).intValue();
+        floor = numberInput.input("Input floor: ", sc, suppress).intValue();
 
         return new Address(area, street, numberOfHouse, floor);
     };
 
-    private static input<Flat.typeOfH> typeInput = (parameters, sc) -> {
+    private static input<Flat.typeOfH> typeInput = (parameters, sc, suppress) -> {
         String input;
 
         while (true) {
-            input = stringInput.input("Input type of house<panel/bricks>: ", sc);
+            input = stringInput.input("Input type of house<panel/bricks>: ", sc, suppress);
 
             if (input.equals(Flat.typeOfH.BRICKS.toString().toLowerCase())) {
                 return Flat.typeOfH.BRICKS;
@@ -89,7 +92,7 @@ public class Command {
         }
     };
 
-    public static void add(FlatDatabase flatDB) {
+    public static void add(FlatDatabase flatDB, Scanner input, boolean suppress) {
         double footage;
         int numberOfRooms;
         Address address;
@@ -97,30 +100,32 @@ public class Command {
         double price;
         Address paramToExch;
 
-        System.out.println("Adding of flat, input all info");
-        footage = numberInput.input("Input footage of the flat: ", stdinput);
-        numberOfRooms = numberInput.input("Input number of rooms: ", stdinput).intValue();
-        address = addressInput.input("Input address of the flat", stdinput);
-        typeOfHouse = typeInput.input("", stdinput);
-        price = numberInput.input("Input price of the flat: ", stdinput);
-        paramToExch = addressInput.input("Input address parameters to exchange", stdinput);
+        if (suppress == false) {
+            System.out.println("Adding of flat, input all info");
+        }
+        footage = numberInput.input("Input footage of the flat: ", input, suppress);
+        numberOfRooms = numberInput.input("Input number of rooms: ", input, suppress).intValue();
+        address = addressInput.input("Input address of the flat", input, suppress);
+        typeOfHouse = typeInput.input("", input, suppress);
+        price = numberInput.input("Input price of the flat: ", input, suppress);
+        paramToExch = addressInput.input("Input address parameters to exchange", input, suppress);
 
         Flat flat = new Flat(footage, numberOfRooms, address, typeOfHouse, price, paramToExch);
 
         flatDB.add(flat);
-        
+
         // To remove
-        flatDB.show();
+        System.out.println(flatDB.toString());
     }
 
-    public static void remove(FlatDatabase flatDB) {
+    public static void remove(FlatDatabase flatDB, Scanner input, boolean suppress) {
         int indexOfFlat = 0;
 
         // Show all address what database has got
         String show = flatDB.show();
         if (!show.isEmpty()) {
             System.out.println(show);
-            indexOfFlat = numberInput.input("Input index of the flat to delete: ", stdinput).intValue();
+            indexOfFlat = numberInput.input("Input index of the flat to delete: ", input, suppress).intValue();
         } else {
             System.out.println("There're no flats in the database");
             return;
@@ -145,36 +150,12 @@ public class Command {
         System.out.println(flatDB.displayByAreas());
     }
 
-    public static void withinRange(FlatDatabase flatDB) {
+    public static void withinRange(FlatDatabase flatDB, Scanner input, boolean suppress) {
         double minimum, maximum;
 
-        minimum = numberInput.input("Input minimum of the price: ", stdinput);
-        maximum = numberInput.input("Input maximum of the price: ", stdinput);
+        minimum = numberInput.input("Input minimum of the price: ", input, suppress);
+        maximum = numberInput.input("Input maximum of the price: ", input, suppress);
 
         System.out.println(flatDB.displayWithinRange(minimum, maximum));
-    }
-    
-    public static void addByMachine(FlatDatabase flatDB, Scanner sc){
-        double footage;
-        int numberOfRooms;
-        Address address;
-        Flat.typeOfH typeOfHouse;
-        double price;
-        Address paramToExch;
-
-        System.out.println("");
-        footage = numberInput.input("", sc);
-        numberOfRooms = numberInput.input("", sc).intValue();
-        address = addressInput.input("s", sc);
-        typeOfHouse = typeInput.input("", sc);
-        price = numberInput.input("", sc);
-        paramToExch = addressInput.input("", sc);
-
-        Flat flat = new Flat(footage, numberOfRooms, address, typeOfHouse, price, paramToExch);
-
-        flatDB.add(flat);
-        
-        // To remove
-        flatDB.show();
     }
 }
