@@ -2,6 +2,7 @@ package flat.exchanger;
 
 import FlatExceptioins.NonPositiveNumberException;
 import FlatExceptioins.EmptyStringException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Command {
@@ -128,14 +129,19 @@ public class Command {
     }
     
     public static void sortByRooms(FlatDatabase flatDB){
-        
+        System.out.println(flatDB.displayByRooms());
     }
     
     public static void sortByAreas(FlatDatabase flatDB){
-        
+        System.out.println(flatDB.displayByAreas());
     }
     
     public static void withinRange(FlatDatabase flatDB){
+        double minimum, maximum;
         
+        minimum = numberInput.input("Input minimum of the price: ");
+        maximum = numberInput.input("Input maximum of the price: ");
+        
+        System.out.println(flatDB.displayWithinRange(minimum, maximum));
     }
 }

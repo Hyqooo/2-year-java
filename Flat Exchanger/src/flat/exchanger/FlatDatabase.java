@@ -1,6 +1,7 @@
 package flat.exchanger;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FlatDatabase {
@@ -32,20 +33,20 @@ public class FlatDatabase {
         return result;
     }
     
-    public Stream toStream(){
-        return flats.stream();
-    }
-    
     public ArrayList<Flat> displayByAreas(){
-        return null;
+        flats.sort((a, b) -> a.getAddress().getArea().compareTo(b.getAddress().getArea()));
+        return flats;
     }
     
     public ArrayList<Flat> displayByRooms(){
-        return null;
+        flats.sort((a, b) -> a.getNumberOfRooms() - b.getNumberOfRooms());
+        return flats;
     }
     
-    public ArrayList<Integer> displayWithinRange(int minimun, int maximum){
-        return null;
+    public ArrayList<Flat> displayWithinRange(double minimum, double maximum){
+        return (ArrayList<Flat>)flats.stream()
+                .filter(each -> each.getPrice() > minimum && each.getPrice() < maximum)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -26,6 +26,14 @@ public class Flat {
     public Address getAddress() {
         return address;
     }
+    
+    public double getPrice() {
+        return price;
+    }
+
+    public int getNumberOfRooms() {
+        return numberOfRooms;
+    }
 
     @Override
     public boolean equals(Object obj) {

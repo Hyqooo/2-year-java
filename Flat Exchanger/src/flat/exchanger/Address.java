@@ -14,6 +14,10 @@ class Address {
         this.floor = floor;
     }
 
+    public String getArea() {
+        return area;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
