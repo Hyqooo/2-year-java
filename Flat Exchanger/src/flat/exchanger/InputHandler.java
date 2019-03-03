@@ -6,9 +6,10 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class InputHandler {
-    
+
     private static Scanner stdinput = new Scanner(System.in);
-    
+    private static Scanner toFile;
+
     // Original database
     static FlatDatabase DB = new FlatDatabase();
 
@@ -30,13 +31,13 @@ public class InputHandler {
 
             switch (command) {
                 case "add":
-                    Command.add(DB, stdinput,false);
+                    Command.add(DB, stdinput, false);
                     break;
                 case "remove":
-                    Command.remove(DB, stdinput,false);
+                    Command.remove(DB, stdinput, false);
                     break;
                 case "search":
-                    Command.search(DB);
+                    Command.search(DB, stdinput, "writeto.txt");
                     break;
                 case "areas":
                     Command.sortByAreas(DB);
@@ -45,7 +46,7 @@ public class InputHandler {
                     Command.sortByRooms(DB);
                     break;
                 case "range":
-                    Command.withinRange(DB, stdinput,false);
+                    Command.withinRange(DB, stdinput, false);
                     break;
                 case "help":
                     help.forEach((k, v) -> System.out.println(k + " - " + v));

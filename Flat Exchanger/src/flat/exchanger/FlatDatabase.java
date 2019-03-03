@@ -18,14 +18,29 @@ public class FlatDatabase {
     public void remove(int index) throws IndexOutOfBoundsException {
         flats.remove(index);
     }
+    
+    public Flat getFlat(int index) throws IndexOutOfBoundsException{
+        return flats.get(index);
+    }
 
-    public ArrayList<Flat> search(Flat flat) {
+    public ArrayList<Flat> search(int index) {
+        Flat flat = flats.get(index);
         return (ArrayList<Flat>) flats.stream()
                 .filter((each) -> each.getAddress().equals(flat.getParamOfExchange()))
                 .collect(Collectors.toList());
     }
 
     public String show() {
+        String result = "";
+
+        for (int i = 0; i < flats.size(); i++) {
+            result += (i + 1) + ") " + flats.get(i).getAddress().toString() + "\n";
+        }
+
+        return result;
+    }
+    
+    public String show(ArrayList<Flat> flats){
         String result = "";
 
         for (int i = 0; i < flats.size(); i++) {

@@ -2,6 +2,12 @@ package flat.exchanger;
 
 import FlatExceptioins.NonPositiveNumberException;
 import FlatExceptioins.EmptyStringException;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Command {
@@ -114,7 +120,7 @@ public class Command {
         flatDB.add(flat);
 
         // To remove
-        System.out.println(flatDB.toString());
+//        System.out.println(flatDB.toString());
     }
 
     public static void remove(FlatDatabase flatDB, Scanner input, boolean suppress) {
@@ -137,8 +143,30 @@ public class Command {
         }
     }
 
-    public static void search(FlatDatabase flatDB, Scanner toFile) {
-        
+    public static void search(FlatDatabase flatDB, Scanner input, String toFile) {
+        int index;
+        try {
+            // Show list of all addresses of flats
+            System.out.println(flatDB.show());
+            index = numberInput.input("Choose index of flat to exchange: ", input, false).intValue();
+
+            ArrayList<Flat> flatsWithinRange = flatDB.search(index - 1);
+            System.out.println(flatDB.show(flatsWithinRange));
+
+            if (flatsWithinRange.size() != 0) {
+                index = numberInput.input("Input number of flat to exchange with: ", input, false).intValue();
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter(toFile));
+                writer.write(flatDB.getFlat(index).toString());
+
+                flatDB.remove(index);
+                writer.close();
+            }else{
+                System.out.println("Nothing is found, come again later!");
+            }
+        } catch (IOException | IndexOutOfBoundsException e) {
+            System.out.println(e);
+        }
     }
 
     public static void sortByRooms(FlatDatabase flatDB) {
