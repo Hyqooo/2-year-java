@@ -3,18 +3,14 @@ package flat.exchanger;
 import FlatExceptioins.NonPositiveNumberException;
 import FlatExceptioins.EmptyStringException;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Command {
-
     // Input is interface because we can return any type we want to
     private interface input<R> {
-
         R input(String parameter, Scanner sc, boolean suppress);
     }
 
@@ -118,9 +114,6 @@ public class Command {
         Flat flat = new Flat(footage, numberOfRooms, address, typeOfHouse, price, paramToExch);
 
         flatDB.add(flat);
-
-        // To remove
-//        System.out.println(flatDB.toString());
     }
 
     public static void remove(FlatDatabase flatDB, Scanner input, boolean suppress) {
@@ -153,7 +146,7 @@ public class Command {
             ArrayList<Flat> flatsWithinRange = flatDB.search(index - 1);
             System.out.println(flatDB.show(flatsWithinRange));
 
-            if (flatsWithinRange.size() != 0) {
+            if (!flatsWithinRange.isEmpty()) {
                 index = numberInput.input("Input number of flat to exchange with: ", input, false).intValue();
 
                 BufferedWriter writer = new BufferedWriter(new FileWriter(toFile));

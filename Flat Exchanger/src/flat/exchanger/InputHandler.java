@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class InputHandler {
 
     private static Scanner stdinput = new Scanner(System.in);
-    private static Scanner toFile;
 
     // Original database
     static FlatDatabase DB = new FlatDatabase();

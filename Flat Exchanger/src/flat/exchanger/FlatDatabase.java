@@ -39,7 +39,7 @@ public class FlatDatabase {
 
         return result;
     }
-    
+
     public String show(ArrayList<Flat> flats){
         String result = "";
 
