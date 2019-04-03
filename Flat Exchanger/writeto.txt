@@ -1,0 +1,14 @@
+Footage: 100.0
+NumberOfRooms: 3
+Address
+Area: zavolga
+Street: soyznaya
+Number of house: 144
+Floor: 7
+Type of house: BRICKS
+Price: 600.0
+Parameters of exchange
+Area: zavolga
+Street: soyznaya
+Number of house: 141
+Floor: 7

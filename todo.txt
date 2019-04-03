@@ -1,0 +1,43 @@
+﻿TODO
+
+Программа, моделирующая процесс обмена квартир.
+Сведения о каждой квартире:
+	- Метраж 
+	- Количество комнат
+	- Адрес (район, улица, дом)
+	- Этаж
+	- Вид дома (панельный, кирпичный)
+	- Количество этажей
+	- Стоимость
+	- Параметры обмена (район, улица, этаж)
+
+# Needed to provided following functions:
+ 	- Adding of flat
+ 	- Deleting of flat
+ 	- Search flat for exchange with extra payment, info about variants should be displayed,
+ 	and variant choosen by user should be written in unique file and deleted from lists
+ 	- Display all flats sorted by areas
+ 	- Display all flats sorted by numbers of rooms
+ 	- Display all flats withing certain range of prices
+
+
+ =====================================================================================================
+
+ TODO:
+	 
+=======================================================================================================
+
+footage
+number of rooms
+address
+	area
+	street
+	number of house
+	floor
+type of the house
+price
+param to exchange
+	area
+	street 
+	number of house
+	floor
