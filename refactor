@@ -1,0 +1,7 @@
+- Seems suppress variable impossible to delete
+- Remove interface and replace all it functions with regular functions
+- Delete all unused imports and variables
+- There're two functions 'show' in the Database class
+- Maybe I should remove enum 
+- What if instead of passing message I should pass an action, like many function
+	as arguments gets lambda expressions (Works)
