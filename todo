@@ -57,6 +57,8 @@
 
 		- I need somehow map real number to pixels
 
+		- Everything is calculated relative to the orbit of the Earth
+
 		Contorller:
 			Goal:
 				- Manage calculations and properly transmit info to the View
@@ -94,3 +96,7 @@
 		angular velocity:
 			earth: pi/30
 			any planet: X = 60*T/365 => angular_velocity = 2*pi/X
+
+		proportions:
+			earth radius: 0.00004
+			
