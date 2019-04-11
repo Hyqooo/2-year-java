@@ -93,10 +93,35 @@
 
 
 	NUBMERS:
+		earth's radius:
+			6371.0 km
+
 		angular velocity:
 			earth: pi/30
 			any planet: X = 60*T/365 => angular_velocity = 2*pi/X
 
-		proportions:
-			earth radius: 0.00004
-			
+		proportions relative to radius of the earth:
+			sun radius: 109 * EARTH_RADIUS
+ 			mercury radius: 0.3871
+			venus radius: 0.7233
+			moon radius: 0.0026
+			earth radius: 1
+
+
+
+		orbits:
+			mercury - 57,909,050 km
+			venus - 108,208,000 km
+			moon - 385,000 km
+			earth - 149,598,023 km
+			mars - 227,939,200 km
+
+
+
+
+//        mercury = new SkyBody(new Position(0, 0), 100, 0.000004, 88, null, "Mercury");
+//        venus = new SkyBody(new Position(0, 0), 100, 0.000004, 225, null, "Venus");
+//        moon = new SkyBody(new Position(0, 0), 100, 0.000004, 27, null, "Moon");
+//        ArrayList<SkyBody> earth_satellites = new ArrayList<>();
+//        earth_satellites.add(moon);
+//        mars = new SkyBody(new Position(0, 0), 100, 0.000004, 687, null, "Mars");

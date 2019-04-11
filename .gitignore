@@ -24,3 +24,5 @@ hs_err_pid*
 /gui_apps/solar_system/nbproject/private/
 /gui_apps/solar_system/dist/
 /gui_apps/solar_system/build/
+/gui_apps/maintest/nbproject/private/
+/gui_apps/maintest/build/

@@ -31,4 +31,12 @@ public class SkyBody {
     public double getOrbitRadius() {
         return orbitRadius;
     }
+    
+    public double getRadius(){
+        return bodyRadius;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
