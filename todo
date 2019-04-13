@@ -5,7 +5,9 @@ TODO:
 	  - Think about if allow to user to freely scale or just show different fixed scales(all solar system/four planets)
 	  - Think how to easily turn off thing to render(Maybe with boolean value that signals if a body should be rendered or not)
 	  - Think one more time about relative sizes and how do this easy to do and change them
-	- 
+  - Add color to the skybody
+  - Add color to the orbit
+  - Draw not circumferences but circles  
 
 UNIMPORTANT:
   - Think up good visual design (Unimportant)
@@ -14,4 +16,5 @@ UNIMPORTANT:
 
 DONE:
   - Render update think about it maybe it doesn't work
+  - put all planets into arraylist and just iterate thorugh them
 	

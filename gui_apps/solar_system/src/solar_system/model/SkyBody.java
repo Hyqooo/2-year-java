@@ -46,4 +46,8 @@ public class SkyBody {
         anchorPoint.setX(x);
         anchorPoint.setY(y);
     }
+
+    public ArrayList<SkyBody> getSatellites() {
+        return satellites;
+    }
 }

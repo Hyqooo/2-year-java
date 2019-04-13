@@ -139,6 +139,8 @@
 			mars - 227,939,200 km
 
 
+// I can use this method to control speed
+timeline.setRate(value);
 
 
 //        mercury = new SkyBody(new Position(0, 0), 100, 0.000004, 88, null, "Mercury");
