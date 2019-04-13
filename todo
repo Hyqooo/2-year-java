@@ -1,10 +1,6 @@
 TODO:
-	  - I need to design algorithm of position calculations with more care
-	  - Proper mapping from real sizes to pixels
-	  - Think better scaling functions
 	  - Think about if allow to user to freely scale or just show different fixed scales(all solar system/four planets)
 	  - Think how to easily turn off thing to render(Maybe with boolean value that signals if a body should be rendered or not)
-	  - Think one more time about relative sizes and how do this easy to do and change them
   - Add color to the skybody
   - Add color to the orbit
   - Draw not circumferences but circles  
@@ -15,8 +11,12 @@ UNIMPORTANT:
   - Better algorithm for render update (super-unimportant)
 
 DONE:
+	  - I need to design algorithm of position calculations with more care
+	  - Think better scaling functions
+	  - Proper mapping from real sizes to pixels
+	  - Think one more time about relative sizes and how do this easy to do and change them
   - Think up something for easy scaling time and size
   - BUG: orbit scale doesn't work properly
   - Render update think about it maybe it doesn't work
   - put all planets into arraylist and just iterate thorugh them
-	
+  - Fixes with milliseconds it is not how it should work(Fixing of the time)

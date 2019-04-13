@@ -16,7 +16,7 @@ public class Controller {
     // earth radius / earth orbit radius
     private static final double EARTH_RADIUS_COEFF = 2;
     private static double SCALE_OF_THE_ORBIT = 1;
-    private static double TIME_SCALE = 0.01;
+    private static double TIME_SCALE = 0.0002;
 
     static View view;
 
@@ -28,14 +28,14 @@ public class Controller {
         SkyBody venus = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT * 0.7233, EARTH_RADIUS_COEFF * 0.7, 225, null, "Venus");
 
         // Earth
-        SkyBody moon = new SkyBody(new Position(0, 0), SCALE_OF_THE_ORBIT * 0.1, EARTH_RADIUS_COEFF * 0.5, 27, null, "Moon");
+        SkyBody moon = new SkyBody(new Position(0, 0), SCALE_OF_THE_ORBIT * 0.07, EARTH_RADIUS_COEFF * 0.5, 27, null, "Moon");
         ArrayList<SkyBody> earth_satellites = new ArrayList<>();
         earth_satellites.add(moon);
         SkyBody earth = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT, EARTH_RADIUS_COEFF, 365, earth_satellites, "Earth");
         
         // Mars
-        SkyBody phobos = new SkyBody(new Position(0, 0), SCALE_OF_THE_ORBIT * 0.04, EARTH_RADIUS_COEFF * 0.1, 0.0318, null, "Phobos");
-        SkyBody deimos = new SkyBody(new Position(0, 0), SCALE_OF_THE_ORBIT * 0.07, EARTH_RADIUS_COEFF * 0.1, -1.263, null, "Deimos");
+        SkyBody phobos = new SkyBody(new Position(0, 0), SCALE_OF_THE_ORBIT * 0.04, EARTH_RADIUS_COEFF * 0.1, 0.318, null, "Phobos");
+        SkyBody deimos = new SkyBody(new Position(0, 0), SCALE_OF_THE_ORBIT * 0.07, EARTH_RADIUS_COEFF * 0.1, 1.263, null, "Deimos");
         ArrayList<SkyBody> mars_satellites = new ArrayList<>();
         mars_satellites.add(phobos);
         mars_satellites.add(deimos);
@@ -68,21 +68,24 @@ public class Controller {
     }
     
     public static void display(){
+        long time = System.currentTimeMillis();
+        
         view.clearCanvas();
         PositionEvaluator.setScale(SCALE_OF_THE_ORBIT);
         for (SkyBody body : bodies){
+            long offset = System.currentTimeMillis();
             view.redrawOrbit(body, SCALE_OF_THE_ORBIT);
             // WARNING: SCALE_OF_THE_ORBIT applied to the size of the planets
-            view.redrawPlanet(body, SCALE_OF_THE_ORBIT, PositionEvaluator.evaluatePosition(body, TIME_SCALE, System.currentTimeMillis() / 80));
-            view.redrawName(body, PositionEvaluator.evaluatePosition(body, TIME_SCALE, System.currentTimeMillis() / 80), SCALE_OF_THE_ORBIT);
+            view.redrawPlanet(body, SCALE_OF_THE_ORBIT, PositionEvaluator.evaluatePosition(body, TIME_SCALE, 2 * offset - time));
+            view.redrawName(body, PositionEvaluator.evaluatePosition(body, TIME_SCALE, 2 * offset - time), SCALE_OF_THE_ORBIT);
             if (body.getSatellites() != null){
                 for (SkyBody sat : body.getSatellites()){
-                    Position bodyPos = PositionEvaluator.evaluatePosition(body, TIME_SCALE, System.currentTimeMillis() / 80);
+                    Position bodyPos = PositionEvaluator.evaluatePosition(body, TIME_SCALE, 2 * offset - time);
                     sat.setAnchorPoint(bodyPos.x(), bodyPos.y());
                     view.redrawOrbit(sat, SCALE_OF_THE_ORBIT);
                     // WARNING: SCALE_OF_THE_ORBIT applied to the size of the planets
-                    view.redrawPlanet(sat, SCALE_OF_THE_ORBIT, PositionEvaluator.evaluatePosition(sat, TIME_SCALE, System.currentTimeMillis() / 80));
-                    view.redrawName(sat, PositionEvaluator.evaluatePosition(sat, TIME_SCALE, System.currentTimeMillis() / 80), SCALE_OF_THE_ORBIT);
+                    view.redrawPlanet(sat, SCALE_OF_THE_ORBIT, PositionEvaluator.evaluatePosition(sat, TIME_SCALE, 2 * offset - time));
+                    view.redrawName(sat, PositionEvaluator.evaluatePosition(sat, TIME_SCALE, 2 * offset - time), SCALE_OF_THE_ORBIT);
                 }
             }
         }
