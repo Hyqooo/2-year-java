@@ -9,6 +9,7 @@ public class SkyBody {
     private double period;
     private ArrayList<SkyBody> satellites;
     private String name;
+    private boolean redraw = true;
 
     public SkyBody(Position anchorPoint, double orbitRadius, double bodyRadius, double period,
                    ArrayList<SkyBody> satellites, String name) {
@@ -38,5 +39,11 @@ public class SkyBody {
 
     public String getName() {
         return name;
+    }
+    
+    // this should be overwritten
+    public void setAnchorPoint(double x, double y){
+        anchorPoint.setX(x);
+        anchorPoint.setY(y);
     }
 }

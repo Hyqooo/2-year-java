@@ -1,11 +1,15 @@
 TODO:
   - I need to design algorithm of position calculations with more care
-  - Render update think about it maybe if don't work
+  - Render update think about it maybe it doesn't work
   - Proper mapping from real sizes to pixels
   - Think better scaling functions
   - Think about if allow to user to freely scale or just show different fixed scales(all solar system/four planets)
   - Think how to easily turn off thing to render(Maybe with boolean value that signals if a body should be rendered or not)
-  - Think one more time about relative sizes and how do this easy to do and change
-  - Better algorithm for render update (super-unimportant)
+  - Think one more time about relative sizes and how do this easy to do and change them
+
+
+UNIMPORTANT:
   - Think up good visual design (Unimportant)
     - Bound both visual and control panels
+  - Better algorithm for render update (super-unimportant)
+

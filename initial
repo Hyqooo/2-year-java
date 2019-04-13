@@ -17,7 +17,7 @@
 		- User is allowed to turn on/off names of the planets and their satellites, their orbits and trajectories, and increase or decrease speeds of the bodies in the solar system 
 			- To turn on/off names we just need to walkthrough all planets 
 			- To turn on/off satellites we need to send request to each body and ask if it has any satellites and if it has turn them off
-			- To turn on/off orbits I need to do something better
+			- To turn on/off orbits I need to do something better, I think I just can do not send request to redraw orbits
 
 	INITIAL THOUGHTS:
 		- Each body should contain following properties:
@@ -51,6 +51,20 @@
 			- Turned out that we can easily choose radius of the orbit to 0 or just do not recalculate position of the sun
 
 	IMPLEMENTATION:
+		How does it actually work?
+			I. Planet redrawing:
+				- controller sends request to the model to calculate next position of any planet
+				- model responses with this position 
+				- controller sends request to the view to redraw the planet
+			II. Orbit redrawing:
+				- controller gets data from the view about what scale it needs to apply
+				- controller applyes scale
+				- controller sends request to the view to redraw orbit accroding to this scale
+			III. Name redrawing:
+				- controller already has data about position of the planet which name is attached to
+				- contoller sends request to the view to redraw name of the planet
+
+
 		- Body class:
 			~ Anchor point
 			~ Radius of its orbit

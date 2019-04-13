@@ -58,28 +58,39 @@ public class View {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    
+    public void clearCanvas(){
+        gc.clearRect(0, 0, 800, 600);
+    }
 
     public void redrawOrbit(SkyBody body, double scale) {
         double radius = body.getOrbitRadius() * 400 * scale;
         System.out.println(radius);
         gc.strokeOval(
-                (canvas.getWidth() / 2) - (radius / 2),
-                (canvas.getHeight() / 2) - (radius / 2),
+                // @cleanup there's problem with (radius / 2) it is not how it should work
+                body.getAnchorPoint().x() + (canvas.getWidth() / 2) - (radius / 2),
+                body.getAnchorPoint().y() + (canvas.getHeight() / 2) - (radius / 2),
                 radius, radius);
     }
 
     public void redrawPlanet(SkyBody body, double scale, Position pos) {
         double diameter = 2 * body.getRadius() * scale;
-        System.out.println(body.getName() + ":" + pos);
+        System.out.println("Planet redraw - " + body.getName() + ":" + pos);
+        double redraw_position_x = /*body.getAnchorPoint().x()*/ + pos.x() + canvas.getWidth() / 2 - diameter / 2;
+        double redraw_position_y = /*body.getAnchorPoint().y()*/ + pos.y() + canvas.getHeight() / 2 - diameter / 2;
         
-        gc.strokeOval(pos.x() + canvas.getWidth() / 2 - diameter / 2, 
-                      pos.y() + canvas.getHeight() / 2 - diameter / 2, 
-                      diameter, diameter);
+        System.out.println("Actual planet coords: " + "\nx: " + redraw_position_x + "\ny: " + redraw_position_y);
+                
+        gc.strokeOval(redraw_position_x, redraw_position_y, diameter, diameter);
     }
     
     public void redrawName(SkyBody body, Position pos, double scale){
         double diameter = 2 * body.getRadius() * scale;
-//        System.out.println(body.getName() + ": " + pos);
-        gc.strokeText(body.getName(), pos.x(), pos.y());
+        System.out.println("name redraw - " + body.getName() + ": " + pos);
+        double redraw_position_x = pos.x() + canvas.getWidth() / 2 - diameter / 2;
+        double redraw_position_y = pos.y() + canvas.getHeight() / 2 - diameter / 2;
+        
+        
+        gc.strokeText(body.getName(), redraw_position_x + diameter, redraw_position_y + diameter);
     }
 }
