@@ -11,9 +11,11 @@ public class PositionEvaluator {
         // All calculations done relative to the Earth's angular velocity
         if (body.getPeriod() != 0) {
             angular_velocity = (2 * Math.PI * 365) / (60 * body.getPeriod());
-
-            x = body.getAnchorPoint().x() + body.getOrbitRadius() * 200 * Math.cos(angular_velocity * time);
-            y = body.getAnchorPoint().y() + body.getOrbitRadius() * 200 * Math.sin(angular_velocity * time);
+            
+            // WARNING: here we have 200 multiplier maybe we need to do something with this also apply sizes
+            // WARNING: multiplication on the earth_orbit_scale
+            x = body.getAnchorPoint().x() + body.getOrbitRadius() * earth_orbit_scale * 200 * Math.cos(angular_velocity * time * time_scale);
+            y = body.getAnchorPoint().y() + body.getOrbitRadius() * earth_orbit_scale *  200 * Math.sin(angular_velocity * time * time_scale);
         }
         return new Position(x, y);
     }

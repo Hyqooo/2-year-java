@@ -74,23 +74,23 @@ public class View {
     }
 
     public void redrawPlanet(SkyBody body, double scale, Position pos) {
-        double diameter = 2 * body.getRadius() * scale;
+        double radius = body.getRadius() * scale;
         System.out.println("Planet redraw - " + body.getName() + ":" + pos);
-        double redraw_position_x = /*body.getAnchorPoint().x()*/ + pos.x() + canvas.getWidth() / 2 - diameter / 2;
-        double redraw_position_y = /*body.getAnchorPoint().y()*/ + pos.y() + canvas.getHeight() / 2 - diameter / 2;
+        double redraw_position_x = pos.x() + canvas.getWidth() / 2 - radius;
+        double redraw_position_y = pos.y() + canvas.getHeight() / 2 - radius;
         
         System.out.println("Actual planet coords: " + "\nx: " + redraw_position_x + "\ny: " + redraw_position_y);
                 
-        gc.strokeOval(redraw_position_x, redraw_position_y, diameter, diameter);
+        gc.strokeOval(redraw_position_x, redraw_position_y, radius * 2, radius * 2);
     }
     
     public void redrawName(SkyBody body, Position pos, double scale){
-        double diameter = 2 * body.getRadius() * scale;
+        double radius = body.getRadius() * scale;
         System.out.println("name redraw - " + body.getName() + ": " + pos);
-        double redraw_position_x = pos.x() + canvas.getWidth() / 2 - diameter / 2;
-        double redraw_position_y = pos.y() + canvas.getHeight() / 2 - diameter / 2;
+        double redraw_position_x = pos.x() + canvas.getWidth() / 2 - radius;
+        double redraw_position_y = pos.y() + canvas.getHeight() / 2 - radius;
         
         
-        gc.strokeText(body.getName(), redraw_position_x + diameter, redraw_position_y + diameter);
+        gc.strokeText(body.getName(), redraw_position_x + radius * 2, redraw_position_y + radius * 2);
     }
 }

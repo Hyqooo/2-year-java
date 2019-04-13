@@ -15,6 +15,8 @@ UNIMPORTANT:
   - Better algorithm for render update (super-unimportant)
 
 DONE:
+  - Think up something for easy scaling time and size
+  - BUG: orbit scale doesn't work properly
   - Render update think about it maybe it doesn't work
   - put all planets into arraylist and just iterate thorugh them
 	

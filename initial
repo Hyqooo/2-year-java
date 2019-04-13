@@ -51,6 +51,11 @@
 			- Turned out that we can easily choose radius of the orbit to 0 or just do not recalculate position of the sun
 
 	IMPLEMENTATION:
+		What about scale:
+			- if we increase size_scale we increase orbit sizes
+			- if we increase time scale we increase speed of the planets(we multiply time scale by time(PositionEvaluator))
+			
+
 		How does it actually work?
 			I. Planet redrawing:
 				- controller sends request to the model to calculate next position of any planet
