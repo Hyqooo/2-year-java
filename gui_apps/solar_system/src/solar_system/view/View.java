@@ -21,7 +21,7 @@ public class View {
     private GraphicsContext gc;
 
     public View(Stage primaryStage) {
-        canvas = new Canvas(800, 600);
+        canvas = new Canvas(900, 700);
         gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.FLORALWHITE);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -52,7 +52,7 @@ public class View {
         pane.setAlignment(Pos.CENTER_LEFT);
         pane.getChildren().addAll(holder);
 
-        Scene scene = new Scene(pane, 1100, 600);
+        Scene scene = new Scene(pane, 1200, 700);
 
         primaryStage.setTitle("Solar system");
         primaryStage.setScene(scene);
@@ -60,7 +60,7 @@ public class View {
     }
     
     public void clearCanvas(){
-        gc.clearRect(0, 0, 800, 600);
+        gc.clearRect(0, 0, 900, 700);
     }
 
     public void redrawOrbit(SkyBody body, double scale) {
