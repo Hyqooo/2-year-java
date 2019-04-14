@@ -1,6 +1,7 @@
 package solar_system.model;
 
 import java.util.ArrayList;
+import javafx.scene.paint.Color;
 
 public class SkyBody {
     private Position anchorPoint;
@@ -10,15 +11,21 @@ public class SkyBody {
     private ArrayList<SkyBody> satellites;
     private String name;
     private boolean redraw = true;
+    private Color color;
 
     public SkyBody(Position anchorPoint, double orbitRadius, double bodyRadius, double period,
-                   ArrayList<SkyBody> satellites, String name) {
+                   ArrayList<SkyBody> satellites, String name, Color color) {
         this.anchorPoint = anchorPoint;
         this.orbitRadius = orbitRadius;
         this.bodyRadius = bodyRadius;
         this.period = period;
         this.satellites = satellites;
         this.name = name;
+        this.color = color;
+    }
+    
+    public Color getColor(){
+        return color;
     }
 
     public double getPeriod() {

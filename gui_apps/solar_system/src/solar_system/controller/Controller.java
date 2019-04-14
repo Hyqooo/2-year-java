@@ -7,6 +7,7 @@ import solar_system.model.PositionEvaluator;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Timeline;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import solar_system.view.View;
 
@@ -15,7 +16,7 @@ public class Controller {
     private static ArrayList<SkyBody> bodies;
 
     // earth radius / earth orbit radius
-    private static final double EARTH_RADIUS_COEFF = 2;
+    private static final double EARTH_RADIUS_COEFF = 3;
     private static double SCALE_OF_THE_ORBIT = 1;
     private static double TIME_SCALE = 0.0001;
 
@@ -30,23 +31,23 @@ public class Controller {
     public static void planetInitialize(Stage primaryStage) {
         Position zeroPosition = new Position(0, 0);
 
-        SkyBody sun = new SkyBody(new Position(0, 0), 0, EARTH_RADIUS_COEFF * 15, 0, null, "Sun");
-        SkyBody mercury = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT * 0.3871, EARTH_RADIUS_COEFF * 0.5, 88, null, "Mercury");
-        SkyBody venus = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT * 0.7233, EARTH_RADIUS_COEFF * 0.7, 225, null, "Venus");
+        SkyBody sun = new SkyBody(new Position(0, 0), 0, EARTH_RADIUS_COEFF * 13, 0, null, "Sun", Color.NAVAJOWHITE);
+        SkyBody mercury = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT * 0.3871, EARTH_RADIUS_COEFF * 0.5, 88, null, "Mercury", Color.GRAY);
+        SkyBody venus = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT * 0.7233, EARTH_RADIUS_COEFF * 0.7, 225, null, "Venus", Color.ANTIQUEWHITE);
 
         // Earth
-        SkyBody moon = new SkyBody(new Position(0, 0), SCALE_OF_THE_ORBIT * 0.07, EARTH_RADIUS_COEFF * 0.5, 27, null, "Moon");
+        SkyBody moon = new SkyBody(new Position(0, 0), SCALE_OF_THE_ORBIT * 0.07, EARTH_RADIUS_COEFF * 0.5, 27, null, "Moon", Color.GAINSBORO);
         ArrayList<SkyBody> earth_satellites = new ArrayList<>();
         earth_satellites.add(moon);
-        SkyBody earth = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT, EARTH_RADIUS_COEFF, 365, earth_satellites, "Earth");
+        SkyBody earth = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT, EARTH_RADIUS_COEFF, 365, earth_satellites, "Earth", Color.BLUE);
 
         // Mars
-        SkyBody phobos = new SkyBody(new Position(0, 0), SCALE_OF_THE_ORBIT * 0.04, EARTH_RADIUS_COEFF * 0.1, 0.318, null, "Phobos");
-        SkyBody deimos = new SkyBody(new Position(0, 0), SCALE_OF_THE_ORBIT * 0.07, EARTH_RADIUS_COEFF * 0.1, 1.263, null, "Deimos");
+        SkyBody phobos = new SkyBody(new Position(0, 0), SCALE_OF_THE_ORBIT * 0.04, EARTH_RADIUS_COEFF * 0.1, 0.318, null, "Phobos", Color.WHEAT);
+        SkyBody deimos = new SkyBody(new Position(0, 0), SCALE_OF_THE_ORBIT * 0.07, EARTH_RADIUS_COEFF * 0.1, 1.263, null, "Deimos", Color.WHEAT);
         ArrayList<SkyBody> mars_satellites = new ArrayList<>();
         mars_satellites.add(phobos);
         mars_satellites.add(deimos);
-        SkyBody mars = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT * 1.5237, EARTH_RADIUS_COEFF * 0.7, 687, mars_satellites, "Mars");
+        SkyBody mars = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT * 1.5237, EARTH_RADIUS_COEFF * 0.7, 687, mars_satellites, "Mars", Color.ORANGE);
 
         bodies = new ArrayList<>();
         bodies.add(sun);

@@ -1,9 +1,6 @@
 TODO:
   - Now size scale works only with central scaling maybe if I can, I'll add scaling at any point
   	- Maybe even attaching to any skybody
-  - Add color to the skybody
-  - Add color to the orbit
-  - Draw not circumferences but circles  
   - There's a problem when we change slider values - system moves back and forth a little
 
 UNIMPORTANT:
@@ -23,3 +20,6 @@ DONE:
   - put all planets into arraylist and just iterate thorugh them
   - Fixes with milliseconds it is not how it should work(Fixing of the time)
   - Better algorithm for render update (super-unimportant)
+  - Draw not circumferences but circles  
+  - Add color to the orbit
+  - Add color to the skybody
