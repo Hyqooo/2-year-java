@@ -17,12 +17,13 @@ public class Controller {
     // earth radius / earth orbit radius
     private static final double EARTH_RADIUS_COEFF = 2;
     private static double SCALE_OF_THE_ORBIT = 1;
-    private static double TIME_SCALE = 0.0002;
+    private static double TIME_SCALE = 0.0001;
 
     private static boolean showOrbits = true;
     private static boolean showPlanets = true;
     private static boolean showSatellites = true;
     private static boolean showNames = true;
+    private static boolean showSatellitesNames = true;
 
     static View view;
 
@@ -91,7 +92,7 @@ public class Controller {
                     view.redrawOrbit(sat, SCALE_OF_THE_ORBIT, showOrbits);
                     // WARNING: SCALE_OF_THE_ORBIT applied to the size of the planets
                     view.redrawPlanet(sat, SCALE_OF_THE_ORBIT, PositionEvaluator.evaluatePosition(sat, TIME_SCALE, 2 * offset - time), showSatellites);
-                    view.redrawName(sat, PositionEvaluator.evaluatePosition(sat, TIME_SCALE, 2 * offset - time), SCALE_OF_THE_ORBIT, showNames);
+                    view.redrawName(sat, PositionEvaluator.evaluatePosition(sat, TIME_SCALE, 2 * offset - time), SCALE_OF_THE_ORBIT, showSatellitesNames);
                 }
             }
         }
@@ -111,9 +112,18 @@ public class Controller {
 
     public static void changeShowNames(boolean value) {
         showNames = value;
+        showSatellitesNames = value;
+    }
+    
+    public static void changeShowSatellitesNames(boolean value){
+        showSatellitesNames = value;
     }
     
     public static void changeTimeScale(Number value){
         TIME_SCALE = value.doubleValue() * 0.002;
+    }
+    
+    public static void changeSizeScale(Number value){
+        SCALE_OF_THE_ORBIT = value.doubleValue();
     }
 }

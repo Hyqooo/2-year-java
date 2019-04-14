@@ -2,6 +2,8 @@ package solar_system.view;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -49,43 +51,38 @@ public class View {
         CheckBox showNames = new CheckBox("Names");
         showNames.setSelected(true);
         Button niceSpeed = new Button("Nice speed");
-       
-
-        showOrbits.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> ov,
-                    Boolean old_val, Boolean new_val) {
-                Controller.changeShowOrbits(new_val);
-            }
+        
+        niceSpeed.setOnAction((ActionEvent e) -> {
+            Controller.changeTimeScale(0.05);
         });
 
-        showPlanets.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> ov,
-                    Boolean old_val, Boolean new_val) {
-                Controller.changeShowPlanets(new_val);
-            }
+        showOrbits.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            Controller.changeShowOrbits(new_val);
         });
 
-        showSatellites.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> ov,
-                    Boolean old_val, Boolean new_val) {
-                Controller.changeShowSatellites(new_val);
-            }
+        showPlanets.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            Controller.changeShowPlanets(new_val);
         });
 
-        showNames.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> ov,
-                    Boolean old_val, Boolean new_val) {
-                Controller.changeShowNames(new_val);
-            }
+        showSatellites.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            Controller.changeShowSatellites(new_val);
+            Controller.changeShowSatellitesNames(new_val);
+        });
+
+        showNames.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            Controller.changeShowNames(new_val);
         });
 
         // time scale
         Slider timeSlider = setSlider();
-        timeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                Controller.changeTimeScale(newValue);
-            }
+        timeSlider.valueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+            Controller.changeTimeScale(newValue);
+        });
+        
+        // size scale 
+        Slider sizeSlider = setSlider();
+        sizeSlider.valueProperty().addListener((ObservableValue<? extends Number> ovservable, Number oldValue, Number newValue) -> {
+            Controller.changeSizeScale(newValue);
         });
 
         // control
@@ -93,7 +90,7 @@ public class View {
         right.setAlignment(Pos.TOP_RIGHT);
         right.setPadding(new Insets(5));
         right.getChildren().addAll(header, showOrbits, showPlanets, showSatellites,
-                showNames, timeSlider, niceSpeed);
+                showNames, timeSlider, niceSpeed, sizeSlider);
 
         HBox holder = new HBox(5);
         holder.setPadding(new Insets(5));

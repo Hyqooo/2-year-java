@@ -1,15 +1,17 @@
 TODO:
-	  - Think about if allow to user to freely scale or just show different fixed scales(all solar system/four planets)
+  - Now size scale works only with central scaling maybe if I can, I'll add scaling at any point
+  	- Maybe even attaching to any skybody
   - Add color to the skybody
   - Add color to the orbit
   - Draw not circumferences but circles  
-  - There's a problem when we change slider values - system returns back a little
+  - There's a problem when we change slider values - system moves back and forth a little
 
 UNIMPORTANT:
   - Think up good visual design (Unimportant)
     - Bound both visual and control panels
 
 DONE:
+	  - Think about if allow to user to freely scale or just show different fixed scales(all solar system/four planets)
 	  - I need to design algorithm of position calculations with more care
 	  - Think better scaling functions
 	  - Proper mapping from real sizes to pixels
