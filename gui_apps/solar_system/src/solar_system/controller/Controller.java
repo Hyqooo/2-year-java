@@ -48,6 +48,12 @@ public class Controller {
         mars_satellites.add(phobos);
         mars_satellites.add(deimos);
         SkyBody mars = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT * 1.5237, EARTH_RADIUS_COEFF * 0.7, 687, mars_satellites, "Mars", Color.ORANGE);
+        
+        SkyBody jupiter = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT * 5.204, EARTH_RADIUS_COEFF * 6, 4332, null, "Jupiter", Color.BLANCHEDALMOND);
+        SkyBody saturn = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT * 9.582, EARTH_RADIUS_COEFF * 5.5, 10759, null, "Saturn", Color.ANTIQUEWHITE);
+        SkyBody uranus = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT * 20, EARTH_RADIUS_COEFF * 2.5, 30689, null, "Uranus", Color.ALICEBLUE);
+        SkyBody neptune = new SkyBody(zeroPosition, SCALE_OF_THE_ORBIT * 30, EARTH_RADIUS_COEFF * 2.3, 89666, null, "Neptune", Color.DARKBLUE);
+        
 
         bodies = new ArrayList<>();
         bodies.add(sun);
@@ -55,6 +61,10 @@ public class Controller {
         bodies.add(venus);
         bodies.add(earth);
         bodies.add(mars);
+        bodies.add(jupiter);
+        bodies.add(saturn);
+        bodies.add(uranus);
+        bodies.add(neptune);
 
         // Set scene
         view = new View(primaryStage);
@@ -83,7 +93,6 @@ public class Controller {
         for (SkyBody body : bodies) {
             long offset = System.currentTimeMillis();
             view.redrawOrbit(body, SCALE_OF_THE_ORBIT, showOrbits);
-            // WARNING: SCALE_OF_THE_ORBIT applied to the size of the planets
             view.redrawPlanet(body, SCALE_OF_THE_ORBIT, PositionEvaluator.evaluatePosition(body, TIME_SCALE, 2 * offset - time), showPlanets);
             view.redrawName(body, PositionEvaluator.evaluatePosition(body, TIME_SCALE, 2 * offset - time), SCALE_OF_THE_ORBIT, showNames);
             if (body.getSatellites() != null) {
@@ -91,7 +100,6 @@ public class Controller {
                     Position bodyPos = PositionEvaluator.evaluatePosition(body, TIME_SCALE, 2 * offset - time);
                     sat.setAnchorPoint(bodyPos.x(), bodyPos.y());
                     view.redrawOrbit(sat, SCALE_OF_THE_ORBIT, showOrbits);
-                    // WARNING: SCALE_OF_THE_ORBIT applied to the size of the planets
                     view.redrawPlanet(sat, SCALE_OF_THE_ORBIT, PositionEvaluator.evaluatePosition(sat, TIME_SCALE, 2 * offset - time), showSatellites);
                     view.redrawName(sat, PositionEvaluator.evaluatePosition(sat, TIME_SCALE, 2 * offset - time), SCALE_OF_THE_ORBIT, showSatellitesNames);
                 }

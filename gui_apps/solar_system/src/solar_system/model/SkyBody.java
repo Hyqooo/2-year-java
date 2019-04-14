@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import javafx.scene.paint.Color;
 
 public class SkyBody {
-    private Position anchorPoint;
-    private double orbitRadius;
-    private double bodyRadius;
-    private double period;
-    private ArrayList<SkyBody> satellites;
-    private String name;
-    private boolean redraw = true;
-    private Color color;
+    private final Position anchorPoint;
+    private final double orbitRadius;
+    private final double bodyRadius;
+    private final double period;
+    private final ArrayList<SkyBody> satellites;
+    private final String name;
+    private final Color color;
 
     public SkyBody(Position anchorPoint, double orbitRadius, double bodyRadius, double period,
                    ArrayList<SkyBody> satellites, String name, Color color) {
@@ -48,7 +47,6 @@ public class SkyBody {
         return name;
     }
     
-    // this should be overwritten
     public void setAnchorPoint(double x, double y){
         anchorPoint.setX(x);
         anchorPoint.setY(y);

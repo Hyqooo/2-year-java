@@ -1,10 +1,7 @@
 package solar_system.view;
 
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.effect.Effect;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,8 +23,8 @@ import solar_system.model.SkyBody;
 
 public class View {
 
-    private Canvas canvas;
-    private GraphicsContext gc;
+    private final Canvas canvas;
+    private final GraphicsContext gc;
 
     public View(Stage primaryStage) {
         canvas = new Canvas(900, 700);
@@ -142,16 +138,16 @@ public class View {
     }
 
     private Slider setSlider() {
-        Slider slider = new Slider(0, 2, 1);
-        slider.setMajorTickUnit(0.1);
+        Slider slider = new Slider(0, 5, 1);
+        slider.setMajorTickUnit(0.05);
         slider.setMinorTickCount(1);
-        slider.setBlockIncrement(0.1);
+        slider.setBlockIncrement(0.025);
         return slider;
     }
 
     public void clearCanvas() {
         gc.clearRect(0, 0, 900, 700);
-        gc.setFill(Color.THISTLE);
+        gc.setFill(Color.PALETURQUOISE);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
@@ -163,9 +159,9 @@ public class View {
         gc.setStroke(Color.CORNFLOWERBLUE);
        
         double radius = body.getOrbitRadius() * 400 * scale;
-        System.out.println(radius);
         gc.strokeOval(
                 // @cleanup there's problem with (radius / 2) it is not how it should work
+                // i don't get it how to fix this but it works
                 body.getAnchorPoint().x() + (canvas.getWidth() / 2) - (radius / 2),
                 body.getAnchorPoint().y() + (canvas.getHeight() / 2) - (radius / 2),
                 radius, radius);
@@ -179,11 +175,9 @@ public class View {
         gc.setFill(body.getColor());
 
         double radius = body.getRadius() * scale;
-        System.out.println("Planet redraw - " + body.getName() + ":" + pos);
         double redraw_position_x = pos.x() + canvas.getWidth() / 2 - radius;
         double redraw_position_y = pos.y() + canvas.getHeight() / 2 - radius;
 
-        System.out.println("Actual planet coords: " + "\nx: " + redraw_position_x + "\ny: " + redraw_position_y);
         gc.fillOval(redraw_position_x, redraw_position_y, radius * 2, radius * 2);
     }
 
@@ -195,7 +189,6 @@ public class View {
         gc.setStroke(Color.BLACK);
 
         double radius = body.getRadius() * scale;
-        System.out.println("name redraw - " + body.getName() + ": " + pos);
         double redraw_position_x = pos.x() + canvas.getWidth() / 2 - radius;
         double redraw_position_y = pos.y() + canvas.getHeight() / 2 - radius;
 
