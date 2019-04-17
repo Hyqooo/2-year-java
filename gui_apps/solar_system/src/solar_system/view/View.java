@@ -68,7 +68,7 @@ public class View {
         });
 
         // time scale
-        Slider timeSlider = setSlider();
+        Slider timeSlider = setSlider(0);
         timeSlider.setValue(0.0001);
         timeSlider.valueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
             Controller.changeTimeScale(newValue);
@@ -80,7 +80,7 @@ public class View {
         });
         
         // size scale 
-        Slider sizeSlider = setSlider();
+        Slider sizeSlider = setSlider(0.055);
         sizeSlider.valueProperty().addListener((ObservableValue<? extends Number> ovservable, Number oldValue, Number newValue) -> {
             Controller.changeSizeScale(newValue);
         });
@@ -137,8 +137,8 @@ public class View {
         primaryStage.show();
     }
 
-    private Slider setSlider() {
-        Slider slider = new Slider(0, 5, 1);
+    private Slider setSlider(double min) {
+        Slider slider = new Slider(min, 5, 1);
         slider.setMajorTickUnit(0.05);
         slider.setMinorTickCount(1);
         slider.setBlockIncrement(0.025);
