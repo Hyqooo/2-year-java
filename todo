@@ -2,6 +2,8 @@ TODO:
   - Now size scale works only with central scaling maybe if I can, I'll add scaling at any point
   	- Maybe even attaching to any skybody
   - There's a problem when we change slider values - system moves back and forth a little
+  - Add invokation of dialog windows for scale changing
+  - Add read from file(this is absolutely redundant)
 
 UNIMPORTANT:
   - Think up good visual design (Unimportant)
