@@ -1,6 +1,6 @@
 package solar_system.view;
 
-import javafx.beans.value.ObservableValue;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,7 +9,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -50,27 +54,27 @@ public class View {
         showNames.setSelected(true);
         Button niceSpeed = new Button("Nice speed");
 
-        showOrbits.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        showOrbits.selectedProperty().addListener((_ov, _old_val, new_val) -> {
             Controller.changeShowOrbits(new_val);
         });
 
-        showPlanets.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        showPlanets.selectedProperty().addListener((_ov, _old_val, new_val) -> {
             Controller.changeShowPlanets(new_val);
         });
 
-        showSatellites.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        showSatellites.selectedProperty().addListener((_ov, _old_val, new_val) -> {
             Controller.changeShowSatellites(new_val);
             Controller.changeShowSatellitesNames(new_val);
         });
 
-        showNames.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        showNames.selectedProperty().addListener((_ov, _old_val, new_val) -> {
             Controller.changeShowNames(new_val);
         });
 
         // time scale
         Slider timeSlider = setSlider(0);
         timeSlider.setValue(0.0001);
-        timeSlider.valueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+        timeSlider.valueProperty().addListener((_observable, _oldValue, newValue) -> {
             Controller.changeTimeScale(newValue);
         });
         
@@ -81,7 +85,7 @@ public class View {
         
         // size scale 
         Slider sizeSlider = setSlider(0.055);
-        sizeSlider.valueProperty().addListener((ObservableValue<? extends Number> ovservable, Number oldValue, Number newValue) -> {
+        sizeSlider.valueProperty().addListener((_ovservable, _oldValue, newValue) -> {
             Controller.changeSizeScale(newValue);
         });
 
@@ -101,7 +105,7 @@ public class View {
         grid.add(showSatellites, 0, 3);
         grid.add(showNames, 0, 4);
         
-        // scales
+        // scale control
         Label scaleHeader = new Label("Scale control");
         scaleHeader.setFont(new Font(18));
         grid.add(scaleHeader, 0, 6);
@@ -130,11 +134,59 @@ public class View {
         pane.setAlignment(Pos.CENTER_LEFT);
         pane.getChildren().addAll(holder);
 
-        Scene scene = new Scene(pane, 1200, 700);
+        // ============================================
+        // Menu
+        MenuBar menuBar = new MenuBar();
+        
+        // Program menu
+        Menu program = new Menu("Program");
+        MenuItem exit = new MenuItem("Exit");
+        exit.setOnAction((_t) -> { System.exit(0); });
+        program.getItems().addAll(exit);
+        
+        // Control menu
+        Menu control = new Menu("Control");
+        
+        
+        // ============================================
+        CheckMenuItem orbitsMenu = createMenuItem("Orbits", (_ov, _old_val, new_val) -> {
+            Controller.changeShowOrbits(new_val);
+        });
+        CheckMenuItem planetsMenu = createMenuItem("Planets", (_ov, _old_val, new_val) -> {
+            Controller.changeShowPlanets(new_val);
+        });
+        
+        CheckMenuItem satellitesMenu = createMenuItem("Satellites", (_ov, _old_val, new_val) -> {
+            Controller.changeShowSatellites(new_val);
+            Controller.changeShowSatellitesNames(new_val);
+        });
+        
+        CheckMenuItem namesMenu = createMenuItem("Names", (_ov, _old_val, new_val) -> {
+            Controller.changeShowNames(new_val);
+        });
+        
+        control.getItems().addAll(orbitsMenu, planetsMenu, satellitesMenu, namesMenu);
+        
+        menuBar.getMenus().addAll(program, control);
+        
+        VBox mainSt = new VBox();
+        mainSt.getChildren().addAll(menuBar, pane);
+        
+        Scene scene = new Scene(mainSt, 1200, 700);
 
         primaryStage.setTitle("Solar system");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    
+    private CheckMenuItem createMenuItem(String title, ChangeListener <? super Boolean> listener){
+        CheckMenuItem cmi = new CheckMenuItem(title);
+        cmi.setSelected(true);
+        cmi.selectedProperty().addListener((_ov, _old_val, new_val) -> {
+            listener.changed(_ov, _old_val, new_val);
+        });
+        
+        return cmi;
     }
 
     private Slider setSlider(double min) {
