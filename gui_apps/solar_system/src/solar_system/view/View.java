@@ -1,20 +1,28 @@
 package solar_system.view;
 
+import java.util.Optional;
+import java.util.function.Consumer;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -56,6 +64,7 @@ public class View {
 
         showOrbits.selectedProperty().addListener((_ov, _old_val, new_val) -> {
             Controller.changeShowOrbits(new_val);
+            
         });
 
         showPlanets.selectedProperty().addListener((_ov, _old_val, new_val) -> {
@@ -77,12 +86,12 @@ public class View {
         timeSlider.valueProperty().addListener((_observable, _oldValue, newValue) -> {
             Controller.changeTimeScale(newValue);
         });
-        
+
         niceSpeed.setOnAction((ActionEvent e) -> {
             Controller.changeTimeScale(0.05);
             timeSlider.setValue(0.05);
         });
-        
+
         // size scale 
         Slider sizeSlider = setSlider(0.055);
         sizeSlider.valueProperty().addListener((_ovservable, _oldValue, newValue) -> {
@@ -92,35 +101,35 @@ public class View {
         // control
         VBox right = new VBox(10);
         right.setPadding(new Insets(10));
-        
+
         GridPane grid = new GridPane();
         grid.setVgap(10);
         grid.setHgap(10);
         grid.setAlignment(Pos.TOP_LEFT);
-        
+
         // checkboxes
         grid.add(header, 0, 0);
         grid.add(showOrbits, 0, 1);
         grid.add(showPlanets, 0, 2);
         grid.add(showSatellites, 0, 3);
         grid.add(showNames, 0, 4);
-        
+
         // scale control
         Label scaleHeader = new Label("Scale control");
         scaleHeader.setFont(new Font(18));
         grid.add(scaleHeader, 0, 6);
-        
+
         grid.add(timeSlider, 0, 7);
         Label timeScale = new Label("Time scale");
         timeScale.setFont(new Font(15));
         grid.add(timeScale, 1, 7);
-        
+
         grid.add(sizeSlider, 0, 8);
         Label sizeScale = new Label("Size scale");
         sizeScale.setFont(new Font(15));
         grid.add(sizeScale, 1, 8);
         grid.add(niceSpeed, 0, 9);
-        
+
         right.setAlignment(Pos.TOP_RIGHT);
         right.getChildren().add(grid);
 
@@ -137,55 +146,102 @@ public class View {
         // ============================================
         // Menu
         MenuBar menuBar = new MenuBar();
-        
+
         // Program menu
         Menu program = new Menu("Program");
         MenuItem exit = new MenuItem("Exit");
-        exit.setOnAction((_t) -> { System.exit(0); });
+        exit.setOnAction((_t) -> {
+            System.exit(0);
+        });
         program.getItems().addAll(exit);
-        
+
         // Control menu
         Menu control = new Menu("Control");
-        
-        
+
         // ============================================
         CheckMenuItem orbitsMenu = createMenuItem("Orbits", (_ov, _old_val, new_val) -> {
             Controller.changeShowOrbits(new_val);
+            showOrbits.setSelected(new_val);
         });
         CheckMenuItem planetsMenu = createMenuItem("Planets", (_ov, _old_val, new_val) -> {
             Controller.changeShowPlanets(new_val);
+            showPlanets.setSelected(new_val);
         });
-        
+
         CheckMenuItem satellitesMenu = createMenuItem("Satellites", (_ov, _old_val, new_val) -> {
             Controller.changeShowSatellites(new_val);
             Controller.changeShowSatellitesNames(new_val);
+            showSatellites.setSelected(new_val);
         });
-        
+
         CheckMenuItem namesMenu = createMenuItem("Names", (_ov, _old_val, new_val) -> {
             Controller.changeShowNames(new_val);
+            showNames.setSelected(new_val);
+        });
+
+        // ============================================
+        MenuItem size = new MenuItem("Size");
+        size.setOnAction((ActionEvent _t) -> {
+            Optional<Slider> result = createDialogMenu("Size", "Change size", 0.055, Controller.getScaleOfTheOrbit());
+            result.ifPresent((sldr) -> {
+                Controller.changeSizeScale(sldr.getValue());
+                sizeSlider.setValue(sldr.getValue());
+            });
         });
         
-        control.getItems().addAll(orbitsMenu, planetsMenu, satellitesMenu, namesMenu);
-        
+        MenuItem speed = new MenuItem("Speed");
+        speed.setOnAction((ActionEvent _t) -> {
+            System.out.println(Controller.getTimeScale());
+            Optional<Slider> result = createDialogMenu("Speed", "Change speed", 0, Controller.getTimeScale() / 0.002);
+            result.ifPresent((sldr) -> {
+                Controller.changeTimeScale(sldr.getValue());
+                timeSlider.setValue(sldr.getValue());
+            });
+        });
+
+        control.getItems().addAll(orbitsMenu, planetsMenu, satellitesMenu, namesMenu, size, speed);
+
         menuBar.getMenus().addAll(program, control);
-        
+
         VBox mainSt = new VBox();
         mainSt.getChildren().addAll(menuBar, pane);
-        
-        Scene scene = new Scene(mainSt, 1200, 700);
+
+        Scene scene = new Scene(mainSt, 1200, 725);
 
         primaryStage.setTitle("Solar system");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    
-    private CheckMenuItem createMenuItem(String title, ChangeListener <? super Boolean> listener){
+
+    private Optional<Slider> createDialogMenu(String title, String header, double min, double value) {
+        Dialog<Slider> dialog = new Dialog<>();
+        dialog.setTitle(title);
+        dialog.setHeaderText(header);
+
+        Slider sldr = setSlider(min);
+        sldr.setValue(value);
+        ButtonType okButton = new ButtonType("Ok", ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButton, ButtonType.CLOSE);
+        dialog.getDialogPane().setContent(sldr);
+        
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == okButton){
+                return sldr;
+            }
+            return null;
+        });
+
+        Optional<Slider> result = dialog.showAndWait();
+        return result;
+    }
+
+    private CheckMenuItem createMenuItem(String title, ChangeListener<? super Boolean> listener) {
         CheckMenuItem cmi = new CheckMenuItem(title);
         cmi.setSelected(true);
         cmi.selectedProperty().addListener((_ov, _old_val, new_val) -> {
             listener.changed(_ov, _old_val, new_val);
         });
-        
+
         return cmi;
     }
 
@@ -209,7 +265,7 @@ public class View {
         }
 
         gc.setStroke(Color.CORNFLOWERBLUE);
-       
+
         double radius = body.getOrbitRadius() * 400 * scale;
         gc.strokeOval(
                 // @cleanup there's problem with (radius / 2) it is not how it should work
@@ -223,7 +279,7 @@ public class View {
         if (!show) {
             return;
         }
-        
+
         gc.setFill(body.getColor());
 
         double radius = body.getRadius() * scale;
@@ -237,7 +293,7 @@ public class View {
         if (!show) {
             return;
         }
-        
+
         gc.setStroke(Color.BLACK);
 
         double radius = body.getRadius() * scale;

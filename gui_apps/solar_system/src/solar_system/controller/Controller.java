@@ -135,4 +135,12 @@ public class Controller {
     public static void changeSizeScale(Number value){
         SCALE_OF_THE_ORBIT = value.doubleValue();
     }
+    
+    public static double getScaleOfTheOrbit(){
+        return SCALE_OF_THE_ORBIT;
+    }
+    
+    public static double getTimeScale(){
+        return TIME_SCALE;
+    }
 }
